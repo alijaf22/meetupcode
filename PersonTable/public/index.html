@@ -1,0 +1,64 @@
+<html ng-app="personTable">
+<head>
+  
+  <link href="css/style.css" rel="stylesheet"></link>
+
+  <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet"></link>
+  
+  <script src="lib/jquery/jquery-1.11.0.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="lib/underscore/underscore.js"></script>
+
+  <script src="js/app.js"></script>
+
+</head>
+<body>
+  <div ng-controller="MainController">
+
+    <div class="container">
+      <div style="margin-bottom: 25px;">
+        <button class="btn" ng-click="fetchData()">
+          <i class="glyphicon glyphicon-refresh"></i>
+          Refresh Sample
+        </button>
+        <button class="btn" ng-click="clearFilters()">
+          <i class="glyphicon glyphicon-remove-sign"></i>
+          Clear Filters
+        </button>
+        <strong style="margin-left: 10px;">Match Count: {{filteredList.length}}</strong>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <div style="margin-left: 35px" class="table-cell record-part">
+          <input ng-model="firstNameFilter" ng-change="runFilters()" type="text"></input>
+        </div>
+        <div class="table-cell record-part">
+          <input ng-model="lastNameFilter" ng-change="runFilters()" type="text"></input>
+        </div>
+        <div class="table-cell record-part">
+          <input ng-model="cityFilter" ng-change="runFilters()" type="text"></input>
+        </div>
+      </div>
+      <div ng-repeat="person in filteredList">
+        <div style="margin-bottom: 2px;">
+          <div ng-class="{'even-row': $even, 'odd-row': $odd}" class="table-cell" style="text-align:center; width: 35px;">
+            {{$index + 1}}
+          </div>
+          <div ng-class="{'even-row': $even, 'odd-row': $odd}" class="table-cell record-part">
+            {{person.firstName}}
+          </div>
+          <div ng-class="{'even-row': $even, 'odd-row': $odd}" class="table-cell record-part">
+            {{person.lastName}}
+          </div>
+          <div ng-class="{'even-row': $even, 'odd-row': $odd}" class="table-cell record-part">
+            {{person.city}}
+          </div>
+          <div class="table-cell delete-button" ng-click="removePerson($index)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
